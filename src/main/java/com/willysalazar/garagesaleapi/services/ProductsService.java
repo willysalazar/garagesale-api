@@ -4,6 +4,8 @@ import com.willysalazar.garagesaleapi.models.ProductsModel;
 import com.willysalazar.garagesaleapi.repositories.ProductsRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -17,4 +19,9 @@ public class ProductsService {
     public ProductsModel save(ProductsModel parkingSpotModel) {
         return parkingSpotRepository.save(parkingSpotModel);
     }
+
+    public Page<ProductsModel> findAll(Pageable pageable) {
+        return parkingSpotRepository.findAll(pageable);
+    }
+
 }
