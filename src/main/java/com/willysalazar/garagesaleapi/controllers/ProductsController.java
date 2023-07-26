@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Optional;
+import java.util.UUID;
 
 
 @RestController
@@ -38,5 +40,15 @@ public class ProductsController {
     public ResponseEntity<Page<ProductsModel>> getProducts(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         return ResponseEntity.status(HttpStatus.OK).body(productsService.findAll(pageable));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOneByIdProducts(@PathVariable(value = "id") UUID id){
+        Optional<ProductsModel> parkingSpotModelOptional = productsService.findById(id);
+        if(!parkingSpotModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotModelOptional.get());
+    }
+
 
 }
