@@ -2,22 +2,27 @@ package com.willysalazar.garagesaleapi.dtos;
 
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductsDto {
     @NotBlank
     private String title;
     @NotBlank
     private String description;
-    @NotBlank
+    @NotNull
     private BigDecimal price;
-    @NotBlank
+    @NotNull
     private BigDecimal discountPercentage;
-    @NotBlank
+    @NotNull
     private int stock;
     @NotBlank
     private String brand;
