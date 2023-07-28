@@ -43,7 +43,9 @@ public class ProductRepositoryTest {
         productsRepository.save(productsModel);
 
         var result = productsRepository.findAll();
-        assertThat(result).contains(productsModel);
+        assertThat(result.get(0)).isEqualTo(productsModel);
+        assertThat(result.get(0).getId()).isEqualTo(productsModel.getId());
+        assertThat(result.get(0).getTitle()).isEqualTo("Webcam Logitech C922 Pro Full HD 1080p");
 
 
 
