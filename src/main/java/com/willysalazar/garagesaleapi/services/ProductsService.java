@@ -20,22 +20,26 @@ import java.util.UUID;
 public class ProductsService {
 
     @Autowired
-    ProductsRepository parkingSpotRepository;
+    ProductsRepository productsRepository;
 
     @Transactional
     public ProductsModel save(ProductsDto productsDto) {
         var productsModel = new ProductsModel();
         BeanUtils.copyProperties(productsDto, productsModel);
         productsModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
-        return parkingSpotRepository.save(productsModel);
+        return productsRepository.save(productsModel);
     }
 
     public Page<ProductsModel> findAll(Pageable pageable) {
-        return parkingSpotRepository.findAll(pageable);
+        return productsRepository.findAll(pageable);
     }
 
     public Optional<ProductsModel> findById(UUID id) {
-        return parkingSpotRepository.findById(id);
+        return productsRepository.findById(id);
     }
 
+    @Transactional
+    public void delete(ProductsModel productsModel) {
+        productsRepository.delete(productsModel);
+    }
 }
