@@ -43,5 +43,15 @@ public class ProductsController {
         return ResponseEntity.status(HttpStatus.OK).body(parkingSpotModelOptional.get());
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteProduct(@PathVariable(value = "id") UUID id){
+        Optional<ProductsModel> productsModelOptional = productsService.findById(id);
+        if(!productsModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+        }
+        productsService.delete(productsModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Product " + productsModelOptional.get().getTitle() + " deleted successfully");
+    }
+
 
 }
