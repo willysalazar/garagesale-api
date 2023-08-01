@@ -55,10 +55,10 @@ public class ProductsControllerTest {
         Mockito.when(productsService.save(productsDto)).thenReturn(productsModel);
 
         mockMvc.perform(post("/products")
-                .contentType("application/json").content(paraJson))
+                        .contentType("application/json").content(paraJson))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title", is("Webcam Logitech C922 Pro Full HD 1080p")));
 
         verify(productsService).save(productsDto);
-     }
+    }
 }

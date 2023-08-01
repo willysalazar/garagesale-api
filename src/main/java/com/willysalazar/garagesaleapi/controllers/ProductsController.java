@@ -4,6 +4,7 @@ import com.willysalazar.garagesaleapi.dtos.ProductsDto;
 import com.willysalazar.garagesaleapi.models.ProductsModel;
 import com.willysalazar.garagesaleapi.services.ProductsService;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -51,6 +52,11 @@ public class ProductsController {
         }
         productsService.delete(productsModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("Product " + productsModelOptional.get().getTitle() + " deleted successfully");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> update(@PathVariable(value = "id") UUID id, @RequestBody @Valid ProductsDto parkingSpotDto){
+        return ResponseEntity.status(HttpStatus.OK).body(productsService.updateAndSave(id, parkingSpotDto));
     }
 
 
